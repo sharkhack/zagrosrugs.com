@@ -10,6 +10,19 @@ document.querySelectorAll('.menu-toggle').forEach((button) => {
   });
 });
 
+// Load the site-wide Tawk.to live chat widget.
+var Tawk_API = window.Tawk_API || {};
+var Tawk_LoadStart = new Date();
+(function () {
+  var firstScript = document.getElementsByTagName('script')[0];
+  var tawkScript = document.createElement('script');
+  tawkScript.async = true;
+  tawkScript.src = 'https://embed.tawk.to/6ab34fc39d49773440aba55d/1k366v4u9';
+  tawkScript.charset = 'UTF-8';
+  tawkScript.setAttribute('crossorigin', '*');
+  firstScript.parentNode.insertBefore(tawkScript, firstScript);
+})();
+
 const galleryImages = document.querySelectorAll('.rug-tile img');
 
 if (galleryImages.length) {
