@@ -138,6 +138,8 @@ h3 { font-size: 1.2rem; }
 .button-ghost.dark { color: var(--red); background: transparent; border-color: var(--red); }
 .button-light { background: white; color: var(--ink); border-color: white; }
 .section { padding: clamp(52px, 8vw, 96px) clamp(20px, 6vw, 84px); }
+.reviews-section { padding-top: 42px; padding-bottom: 42px; }
+.reviews-section .section-heading { margin-bottom: 18px; }
 .narrow { max-width: 1040px; margin: 0 auto; }
 .seo-intro p:last-child, .prose p, .split-band p, .contact-panel p { color: var(--muted); font-size: 1.06rem; }
 .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 28px; }
