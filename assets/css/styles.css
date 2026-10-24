@@ -187,6 +187,27 @@ h3 { font-size: 1.2rem; }
   align-items: center;
 }
 .category-hero img, .story-hero img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 8px; box-shadow: var(--shadow); }
+.size-browser { padding-top: 32px; padding-bottom: 32px; background: #eef0e9; }
+.size-browser .section-heading { align-items: center; margin-bottom: 18px; }
+.size-browser .section-heading p:last-child { margin: 0; color: var(--muted); }
+.size-links, .pill-links { display: flex; flex-wrap: wrap; gap: 10px; }
+.size-links a, .pill-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: white;
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: none;
+}
+.size-links a:hover, .pill-links a:hover { border-color: var(--red); color: var(--red); }
+.size-groups { padding-top: 48px; }
+.size-group { scroll-margin-top: 100px; padding: 28px 0; border-top: 1px solid var(--line); }
+.size-group h3 { font-family: Georgia, 'Times New Roman', serif; font-size: 1.45rem; }
+.size-empty { margin: 14px 0 0; color: var(--muted); }
 .rug-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
