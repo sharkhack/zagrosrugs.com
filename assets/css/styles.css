@@ -186,6 +186,7 @@ h3 { font-size: 1.2rem; }
   gap: clamp(28px, 5vw, 64px);
   align-items: center;
 }
+.vintage-hero { grid-template-columns: minmax(0, 1fr); }
 .category-hero img, .story-hero img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 8px; box-shadow: var(--shadow); }
 .size-browser { padding-top: 32px; padding-bottom: 32px; background: #eef0e9; }
 .size-browser .section-heading { align-items: center; margin-bottom: 18px; }
