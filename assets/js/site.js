@@ -58,8 +58,15 @@ if (galleryImages.length) {
     image.setAttribute('role', 'button');
     image.setAttribute('aria-label', `Open larger image of ${image.alt}`);
 
+    const figure = image.closest('.rug-tile');
+    if (figure && !figure.querySelector('.rug-zoom-hint')) {
+      const zoomHint = document.createElement('span');
+      zoomHint.className = 'rug-zoom-hint';
+      zoomHint.textContent = 'View larger';
+      figure.appendChild(zoomHint);
+    }
+
     const openModal = () => {
-      const figure = image.closest('.rug-tile');
       const caption = figure ? figure.querySelector('figcaption') : null;
       activeTrigger = image;
       modalTitle.textContent = caption ? caption.textContent : image.alt;

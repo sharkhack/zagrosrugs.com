@@ -215,7 +215,8 @@ h3 { font-size: 1.2rem; }
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 16px;
 }
-.rug-tile { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.rug-tile { position: relative; margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.rug-zoom-hint { position: absolute; z-index: 1; top: 10px; right: 10px; padding: 6px 10px; border-radius: 999px; background: rgba(255, 255, 255, 0.92); color: var(--ink); font-size: 0.75rem; font-weight: 700; pointer-events: none; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16); }
 .rug-tile img { width: 100%; aspect-ratio: 1 / 1.18; object-fit: cover; cursor: zoom-in; transition: transform 220ms ease, filter 220ms ease; }
 .rug-photo-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px; }
 .rug-photo-grid img { aspect-ratio: 3 / 4; object-fit: cover; }
