@@ -206,7 +206,8 @@ h3 { font-size: 1.2rem; }
 }
 .size-links a:hover, .pill-links a:hover { border-color: var(--red); color: var(--red); }
 .size-groups { padding-top: 48px; }
-.size-group { scroll-margin-top: 100px; padding: 28px 0; border-top: 1px solid var(--line); }
+.size-group { display: none; scroll-margin-top: 100px; padding: 28px 0; border-top: 1px solid var(--line); }
+.size-group:target { display: block; }
 .size-group h3 { font-family: Georgia, 'Times New Roman', serif; font-size: 1.45rem; }
 .size-empty { margin: 14px 0 0; color: var(--muted); }
 .rug-grid {
