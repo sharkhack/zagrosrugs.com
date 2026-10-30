@@ -220,6 +220,7 @@ h3 { font-size: 1.2rem; }
 .rug-tile img { width: 100%; aspect-ratio: 1 / 1.18; object-fit: cover; cursor: zoom-in; transition: transform 220ms ease, filter 220ms ease; }
 .rug-photo-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px; }
 .rug-photo-grid img { aspect-ratio: 3 / 4; object-fit: cover; }
+.rug-photo-grid-landscape img { aspect-ratio: 3 / 2; object-fit: contain; background: #f1eee7; }
 .rug-tile img:hover, .rug-tile img:focus { filter: brightness(0.92); transform: scale(1.015); outline: none; }
 .rug-tile figcaption { padding: 10px 12px; color: var(--muted); font-weight: 700; font-size: 0.9rem; }
 .modal-open { overflow: hidden; }

@@ -24,6 +24,24 @@ var Tawk_LoadStart = new Date();
 })();
 
 const galleryImages = document.querySelectorAll('.rug-tile img');
+const rugCards = Array.from(document.querySelectorAll('.size-group .rug-tile'));
+
+let nextRugNumber = rugCards.reduce((highest, card) => {
+  const number = Number.parseInt(card.dataset.rugNumber, 10);
+  return Number.isFinite(number) ? Math.max(highest, number) : highest;
+}, 0);
+
+rugCards.forEach((card) => {
+  if (!card.dataset.rugNumber) {
+    nextRugNumber += 1;
+    card.dataset.rugNumber = String(nextRugNumber);
+  }
+
+  const caption = card.querySelector('figcaption');
+  if (caption) {
+    caption.textContent = caption.textContent.replace(/\bRug(?:\s*#?\s*\d+)?\b/i, `Rug #${card.dataset.rugNumber}`);
+  }
+});
 
 if (galleryImages.length) {
   const modal = document.createElement('div');
