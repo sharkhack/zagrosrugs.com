@@ -23,28 +23,30 @@ var Tawk_LoadStart = new Date();
   firstScript.parentNode.insertBefore(tawkScript, firstScript);
 })();
 
-const galleryImages = document.querySelectorAll('.rug-tile img');
-document.querySelectorAll('.size-group').forEach((sizeGroup) => {
-  const rugCards = Array.from(sizeGroup.querySelectorAll('.rug-tile'));
-  let nextRugNumber = rugCards.reduce((highest, card) => {
-    const number = Number.parseInt(card.dataset.rugNumber, 10);
-    return Number.isFinite(number) ? Math.max(highest, number) : highest;
-  }, 0);
+window.initializeRugGallery = () => {
+  const galleryImages = document.querySelectorAll('.rug-tile img');
+  document.querySelectorAll('.size-group').forEach((sizeGroup) => {
+    const rugCards = Array.from(sizeGroup.querySelectorAll('.rug-tile'));
+    let nextRugNumber = rugCards.reduce((highest, card) => {
+      const number = Number.parseInt(card.dataset.rugNumber, 10);
+      return Number.isFinite(number) ? Math.max(highest, number) : highest;
+    }, 0);
 
-  rugCards.forEach((card) => {
-    if (!card.dataset.rugNumber) {
-      nextRugNumber += 1;
-      card.dataset.rugNumber = String(nextRugNumber);
-    }
+    rugCards.forEach((card) => {
+      if (!card.dataset.rugNumber) {
+        nextRugNumber += 1;
+        card.dataset.rugNumber = String(nextRugNumber);
+      }
 
-    const caption = card.querySelector('figcaption');
-    if (caption) {
-      caption.textContent = caption.textContent.replace(/\bRug(?:\s*#?\s*\d+)?\b/i, `Rug #${card.dataset.rugNumber}`);
-    }
+      const caption = card.querySelector('figcaption');
+      if (caption) {
+        caption.textContent = caption.textContent.replace(/\bRug(?:\s*#?\s*\d+)?\b/i, `Rug #${card.dataset.rugNumber}`);
+      }
+    });
   });
-});
 
-if (galleryImages.length) {
+  if (!galleryImages.length || document.querySelector('.image-modal')) return;
+
   const modal = document.createElement('div');
   modal.className = 'image-modal';
   modal.setAttribute('role', 'dialog');
@@ -146,4 +148,6 @@ if (galleryImages.length) {
     if (event.key === 'ArrowLeft') moveImage(-1);
     if (event.key === 'ArrowRight') moveImage(1);
   });
-}
+};
+
+window.initializeRugGallery();
