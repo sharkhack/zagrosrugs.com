@@ -221,6 +221,8 @@ h3 { font-size: 1.2rem; }
 .rug-photo-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px; }
 .rug-photo-grid img { aspect-ratio: 3 / 4; object-fit: cover; }
 .rug-photo-grid-landscape img { aspect-ratio: 3 / 2; object-fit: contain; background: #f1eee7; }
+.rug-photo-set .rug-photo-grid { grid-template-columns: minmax(0, 1fr); }
+.rug-photo-set .rug-photo-grid img:not(:first-child) { display: none; }
 .rug-tile img:hover, .rug-tile img:focus { filter: brightness(0.92); transform: scale(1.015); outline: none; }
 .rug-tile figcaption { padding: 10px 12px; color: var(--muted); font-weight: 700; font-size: 0.9rem; }
 .modal-open { overflow: hidden; }
@@ -258,6 +260,7 @@ h3 { font-size: 1.2rem; }
   font-size: clamp(1.65rem, 4vw, 3rem);
   color: var(--ink);
 }
+.image-modal-stage { position: relative; width: 100%; }
 .image-modal-panel img {
   width: 100%;
   max-height: min(72vh, 820px);
@@ -265,6 +268,27 @@ h3 { font-size: 1.2rem; }
   background: #f4f0e9;
   border-radius: 6px;
 }
+.image-modal-nav {
+  position: absolute;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 54px;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--ink);
+  font-size: 2.4rem;
+  line-height: 1;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+.image-modal-prev { left: 12px; }
+.image-modal-next { right: 12px; }
+.image-modal-nav:hover { border-color: var(--red); color: var(--red); }
+.image-modal-nav[hidden] { display: none; }
+.image-modal-count { min-height: 1.3em; margin: 0; color: var(--muted); text-align: center; font-weight: 700; }
 .image-modal-close {
   position: absolute;
   top: 14px;

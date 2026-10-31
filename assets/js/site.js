@@ -55,7 +55,12 @@ if (galleryImages.length) {
     <div class="image-modal-panel">
       <button class="image-modal-close" type="button" aria-label="Close image">&times;</button>
       <h2 id="image-modal-title"></h2>
-      <img src="" alt="">
+      <div class="image-modal-stage">
+        <img src="" alt="">
+        <button class="image-modal-nav image-modal-prev" type="button" aria-label="Previous photo">&#8249;</button>
+        <button class="image-modal-nav image-modal-next" type="button" aria-label="Next photo">&#8250;</button>
+      </div>
+      <p class="image-modal-count" aria-live="polite"></p>
     </div>
   `;
   document.body.appendChild(modal);
@@ -63,25 +68,48 @@ if (galleryImages.length) {
   const modalTitle = modal.querySelector('#image-modal-title');
   const modalImage = modal.querySelector('img');
   const closeButton = modal.querySelector('.image-modal-close');
+  const previousButton = modal.querySelector('.image-modal-prev');
+  const nextButton = modal.querySelector('.image-modal-next');
+  const imageCount = modal.querySelector('.image-modal-count');
   let activeTrigger = null;
+  let activeImages = [];
+  let activeImageIndex = 0;
+
+  const showActiveImage = () => {
+    const image = activeImages[activeImageIndex];
+    if (!image) return;
+    modalImage.src = image.currentSrc || image.src;
+    modalImage.alt = image.alt;
+    imageCount.textContent = activeImages.length > 1 ? `Photo ${activeImageIndex + 1} of ${activeImages.length}` : '';
+    previousButton.hidden = activeImages.length < 2;
+    nextButton.hidden = activeImages.length < 2;
+  };
+
+  const moveImage = (direction) => {
+    if (activeImages.length < 2) return;
+    activeImageIndex = (activeImageIndex + direction + activeImages.length) % activeImages.length;
+    showActiveImage();
+  };
 
   const closeModal = () => {
     modal.classList.remove('is-open');
     document.body.classList.remove('modal-open');
     if (activeTrigger) activeTrigger.focus();
     activeTrigger = null;
+    activeImages = [];
   };
 
   galleryImages.forEach((image) => {
+    const figure = image.closest('.rug-tile');
+    const hasMorePhotos = figure && figure.querySelectorAll('img').length > 1;
     image.setAttribute('tabindex', '0');
     image.setAttribute('role', 'button');
-    image.setAttribute('aria-label', `Open larger image of ${image.alt}`);
+    image.setAttribute('aria-label', hasMorePhotos ? `Open photo gallery of ${image.alt}` : `Open larger image of ${image.alt}`);
 
-    const figure = image.closest('.rug-tile');
     if (figure && !figure.querySelector('.rug-zoom-hint')) {
       const zoomHint = document.createElement('span');
       zoomHint.className = 'rug-zoom-hint';
-      zoomHint.textContent = 'View larger';
+      zoomHint.textContent = figure.querySelectorAll('img').length > 1 ? 'View all photos' : 'View larger';
       figure.appendChild(zoomHint);
     }
 
@@ -89,8 +117,9 @@ if (galleryImages.length) {
       const caption = figure ? figure.querySelector('figcaption') : null;
       activeTrigger = image;
       modalTitle.textContent = caption ? caption.textContent : image.alt;
-      modalImage.src = image.currentSrc || image.src;
-      modalImage.alt = image.alt;
+      activeImages = figure ? Array.from(figure.querySelectorAll('img')) : [image];
+      activeImageIndex = Math.max(0, activeImages.indexOf(image));
+      showActiveImage();
       modal.classList.add('is-open');
       document.body.classList.add('modal-open');
       closeButton.focus();
@@ -108,8 +137,13 @@ if (galleryImages.length) {
   modal.querySelectorAll('[data-close-modal], .image-modal-close').forEach((element) => {
     element.addEventListener('click', closeModal);
   });
+  previousButton.addEventListener('click', () => moveImage(-1));
+  nextButton.addEventListener('click', () => moveImage(1));
 
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+    if (!modal.classList.contains('is-open')) return;
+    if (event.key === 'Escape') closeModal();
+    if (event.key === 'ArrowLeft') moveImage(-1);
+    if (event.key === 'ArrowRight') moveImage(1);
   });
 }
